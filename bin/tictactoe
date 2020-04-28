@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe",''
+
+def start
+    puts "How many player? ( 0 = computer vs. computer, 1 = human vs. computer, 2 human vs. human)"
+    input = gets.strip
+    puts
+    if input == '0'
+        # binding.pry
+        Game.new(Players::Computer.new('X'), Players::Computer.new('O')).play
+        play_again
+    elsif input == '1'
+        Game.new(Players::Human.new('X'), Players::Computer.new('O')).play
+        play_again
+    elsif
+        Game.new(Players::Human.new('X'), Players::Human.new('O')).play
+        play_again
+    end
+
+    
+    end
+    def play_again
+        puts "Play again? ( y / n )",""
+        input = gets.strip.downcase
+        case input
+        when 'y'
+            start
+        when 'n'
+            puts "See you next time at a game of TicTacToe!"
+        else
+            play_again
+    end
+end
+start
