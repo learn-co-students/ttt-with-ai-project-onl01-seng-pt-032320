@@ -44,7 +44,12 @@ class Game
 
     def turn
         user_input = current_player.move(board) 
-        board.valid_move?(user_input) ? board.update(user_input, current_player) : turn 
+        if board.valid_move?(user_input) 
+            board.update(user_input, current_player)
+            board.display 
+        else 
+            turn
+        end  
     end 
 
     def play
