@@ -5,40 +5,55 @@ require_relative '../config/environment'
 
 
 def greeting 
+    puts "" 
     puts "Welcome to Tic Tac Toe!"
-    puts "Please choose game type:
-    0 - computer vs. computer 
-    1 - 1 player game 
-    2 - 2 player game" 
+    puts ""
+end 
+
+def game_select 
+    puts "      Please choose game type:
+            0 - computer vs. computer 
+            1 - 1 player game 
+            2 - 2 player game" 
 end 
 
 def player? 
     puts "Player 1 ready? [y/n] "
 end 
 
-def new_game 
-        greeting 
-        game_type = gets.strip 
-        player? 
-        player_1 = gets.strip.downcase  
-        if player_1 == "y" 
-            case game_type 
-            when "0" 
-                Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play 
-            when "1" 
-                Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
-            when "2" 
-                Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play 
-            end 
-        elsif player_1 == "n"
-            puts "See you next time!"
-            exit 
-        else
-            puts "Invalid input:"
-            player?
-        end
+def goodbye
+    puts "See you next time!"
 end 
 
+def new_game 
+    user_input = ""
+    until user_input == "exit" 
+        game_select 
+        user_input = gets.strip 
+        player?
+        player_ready = gets.strip.downcase 
+        if player_ready == "y" 
+            case user_input 
+                when "0" 
+                    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play 
+                when "1" 
+                    Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+                when "2" 
+                    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play 
+                when "exit"
+                    exit 
+                else 
+                    puts "I'm not sure what you mean."
+                    game_select 
+            end 
+        elsif player_ready == "n"
+            puts "Please come back when you are ready."
+            exit 
+        end
+    end 
+end 
+
+greeting 
 new_game 
 
 
