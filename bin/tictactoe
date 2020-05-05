@@ -8,13 +8,15 @@ def greeting
     puts "" 
     puts "Welcome to Tic Tac Toe!"
     puts ""
+    game_select
 end 
 
 def game_select 
     puts "  Please choose game type:
-            0 - computer vs. computer 
-            1 - 1 player game 
-            2 - 2 player game" 
+                0 - computer vs. computer 
+                1 - 1 player game 
+                2 - 2 player game" 
+    
 end 
 
 def player? 
