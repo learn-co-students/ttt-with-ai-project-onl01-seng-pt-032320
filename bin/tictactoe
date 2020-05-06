@@ -2,61 +2,57 @@
 
 require_relative '../config/environment'
 
-
-
 def greeting 
     puts "" 
     puts "Welcome to Tic Tac Toe!"
     puts ""
-    game_select
-end 
-
-def game_select 
-    puts "  Please choose game type:
-                0 - computer vs. computer 
-                1 - 1 player game 
-                2 - 2 player game" 
-    
 end 
 
 def player? 
-    puts "Player 1 ready? [y/n] "
+    puts "Would you like to go first? [y/n] "
 end 
 
 def goodbye
     puts "See you next time!"
 end 
 
-def new_game 
-    user_input = ""
-    until user_input == "exit" 
-        game_select 
-        user_input = gets.strip 
-        player?
-        player_ready = gets.strip.downcase 
-        if player_ready == "y" 
-            case user_input 
-                when "0" 
-                    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play 
-                when "1" 
+def menu_options
+    puts  "Please choose game type:"
+    puts "  0 - computer vs. computer" 
+    puts "  1 - 1 player game"
+    puts "  2 - 2 player game" 
+
+def game_start  
+    input = '' 
+    until input == "exit" 
+        menu_options
+        input = gets.strip 
+        case input 
+            when "0" 
+                Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play  
+            when "1" 
+                player? 
+                    if gets.strip == "y" 
                     Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
-                when "2" 
-                    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play 
-                when "exit"
-                    exit 
-                else 
-                    puts "I'm not sure what you mean."
-                    game_select 
-            end 
-        elsif player_ready == "n"
-            puts "Please come back when you are ready."
-            exit 
-        end
+                    elsif gets.strip == "n" 
+                    Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play  
+                    end 
+            when "2" 
+                Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play  
+            when "exit"
+                exit
+                goodbye
+            else
+                puts "I'm not sure what you want, please enter one of the following:" 
+        end 
+        end 
     end 
 end 
 
-greeting 
-new_game 
+greeting
+game_start 
+
+
 
 
 

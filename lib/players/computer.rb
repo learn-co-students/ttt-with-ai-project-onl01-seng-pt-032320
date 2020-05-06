@@ -4,7 +4,6 @@ module Players
 
         def move(board) 
            computer_move(board) 
-           
         end
 
         def computer_move(board) 
