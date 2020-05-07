@@ -2,11 +2,13 @@ require 'pry'
 module Players 
     class Computer < Player 
 
+      
         def move(board) 
            computer_move(board) 
         end
 
         def computer_move(board) 
+            sleep(1) 
             middle_move(board) || corner_move(board) || empty_side_move(board)
         end 
 
@@ -25,6 +27,7 @@ module Players
                  "5" 
             end 
         end 
+
 
     end 
 end 
