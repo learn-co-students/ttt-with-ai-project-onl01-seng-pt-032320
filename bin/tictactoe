@@ -1,3 +1,52 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def greeting 
+    puts "Welcome to Tic Tac Toe!"
+end 
+
+def goodbye
+    puts "See you later, aligator!"
+end 
+
+def menu_options
+    puts "Please choose a game:"
+    puts "0 - computer vs computer"
+    puts "1 - player vs computer"
+    puts "2 - two players game"
+    puts "exit - for exit"
+end
+
+def new_game 
+    user_input = ""
+    until user_input == "exit"
+        menu_options
+        user_input = gets.strip
+        case user_input
+            when "0" 
+                Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play 
+            when "1" 
+                Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+            when "2" 
+                Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play 
+            when "exit"
+                goodbye
+                exit
+            else
+                puts "Wrong input"
+                new_game
+        end
+        puts "One more round? [y/n]"
+        user_input = gets.strip.downcase
+        if user_input == "y"
+            new_game
+        else
+            goodbye
+            exit
+        end
+    end
+end 
+
+greeting
+new_game 
